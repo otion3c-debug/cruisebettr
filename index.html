@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CruiseBettr — Caribbean Cruise Adventures with Eric & Tamika</title>
+  <meta name="description" content="Eric and Tamika share real Caribbean cruise experiences — the good, the bad, and everything in between.">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ocean-deep: #0A2342;
+      --ocean-mid: #0D3B66;
+      --ocean-light: #1A6B8A;
+      --coral: #FF6B35;
+      --sand: #F4E8C1;
+      --white: #FFFFFF;
+      --text-dark: #0A2342;
+      --text-light: rgba(255,255,255,0.85);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 16px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10, 35, 66, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--coral); }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--coral); }
+
+    .nav-cta {
+      background: var(--coral);
+      color: white !important;
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-weight: 600 !important;
+    }
+
+    .nav-cta:hover { background: #e55a2a; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #0A2342 0%, #0D3B66 40%, #1A6B8A 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 120px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120'%3E%3Cpath fill='%23ffffff' d='M0,60 C240,120 480,0 720,60 C960,120 1200,0 1440,60 L1440,120 L0,120 Z'/%3E%3C/svg%3E") no-repeat bottom center;
+      background-size: cover;
+    }
+
+    .hero-wave {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 120px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120'%3E%3Cpath fill='%23ffffff' d='M0,60 C240,120 480,0 720,60 C960,120 1200,0 1440,60 L1440,120 L0,120 Z'/%3E%3C/svg%3E") no-repeat bottom center;
+      background-size: cover;
+    }
+
+    .hero-eyebrow {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(52px, 8vw, 96px);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.05;
+      margin-bottom: 8px;
+    }
+
+    .hero-title span { color: var(--coral); }
+
+    .hero-tagline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(18px, 2.5vw, 24px);
+      color: rgba(255,255,255,0.7);
+      font-style: italic;
+      margin-bottom: 32px;
+    }
+
+    .hero-desc {
+      max-width: 580px;
+      font-size: 16px;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: var(--coral);
+      color: white;
+      padding: 14px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary:hover { background: #e55a2a; transform: translateY(-1px); }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.1);
+      color: white;
+      padding: 14px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover { background: rgba(255,255,255,0.15); }
+
+    /* STATS */
+    .stats {
+      background: var(--white);
+      padding: 48px 40px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      max-width: 800px;
+      margin: 0 auto;
+      border-radius: 16px;
+      position: relative;
+      top: -40px;
+      box-shadow: 0 20px 60px rgba(10,35,66,0.12);
+    }
+
+    .stat { text-align: center; }
+
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      font-weight: 900;
+      color: var(--ocean-deep);
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: #666;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    /* LATEST VIDEO */
+    .section { padding: 80px 40px; }
+
+    .section-tag {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 700;
+      color: var(--ocean-deep);
+      margin-bottom: 40px;
+      line-height: 1.2;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .video-card {
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--white);
+      box-shadow: 0 8px 30px rgba(10,35,66,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .video-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(10,35,66,0.15); }
+
+    .video-thumb {
+      position: relative;
+      padding-top: 56.25%;
+      background: var(--ocean-deep);
+    }
+
+    .video-thumb iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+
+    .video-info { padding: 16px 20px 20px; }
+
+    .video-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ocean-deep);
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .video-meta {
+      font-size: 12px;
+      color: #888;
+    }
+
+    /* ABOUT */
+    .about {
+      background: var(--sand);
+      padding: 100px 40px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      max-width: 1000px;
+      margin: 0 auto;
+      align-items: center;
+    }
+
+    .about-text .section-tag { color: var(--ocean-light); }
+
+    .about-text p {
+      font-size: 16px;
+      color: #444;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .about-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .about-img {
+      border-radius: 16px;
+      height: 200px;
+      background: linear-gradient(135deg, var(--ocean-light), var(--ocean-deep));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .about-img:first-child {
+      grid-column: 1 / -1;
+      height: 240px;
+      background: linear-gradient(135deg, var(--ocean-deep), var(--coral));
+    }
+
+    /* ASK US */
+    .ask {
+      background: var(--white);
+      padding: 100px 40px;
+    }
+
+    .ask-content {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .ask-content p {
+      font-size: 17px;
+      color: #555;
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+
+    .ask-form {
+      background: var(--ocean-deep);
+      border-radius: 20px;
+      padding: 40px;
+      text-align: left;
+    }
+
+    .form-group { margin-bottom: 20px; }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      background: rgba(255,255,255,0.07);
+      color: white;
+      font-size: 15px;
+      font-family: 'Inter', sans-serif;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--coral);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 100px; }
+
+    .ask-form button {
+      width: 100%;
+      padding: 14px;
+      background: var(--coral);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .ask-form button:hover { background: #e55a2a; }
+
+    /* NEWSLETTER */
+    .newsletter {
+      background: linear-gradient(135deg, var(--ocean-deep), var(--ocean-mid));
+      padding: 100px 40px;
+      text-align: center;
+    }
+
+    .newsletter .section-title { color: white; }
+
+    .newsletter p {
+      color: rgba(255,255,255,0.7);
+      font-size: 16px;
+      margin-bottom: 32px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 12px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      padding: 14px 20px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50px;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      font-size: 15px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .newsletter-form input::placeholder { color: rgba(255,255,255,0.5); }
+
+    .newsletter-form input:focus { outline: none; border-color: var(--coral); }
+
+    .newsletter-form button {
+      padding: 14px 28px;
+      background: var(--coral);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .newsletter-form button:hover { background: #e55a2a; }
+
+    /* DEALS */
+    .deals {
+      background: var(--white);
+      padding: 80px 40px;
+    }
+
+    .deals-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .deal-card {
+      border: 1px solid #eee;
+      border-radius: 16px;
+      padding: 24px;
+      transition: all 0.2s;
+    }
+
+    .deal-card:hover { border-color: var(--coral); transform: translateY(-2px); }
+
+    .deal-tag {
+      display: inline-block;
+      background: var(--coral);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 50px;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .deal-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--ocean-deep);
+      margin-bottom: 8px;
+    }
+
+    .deal-desc {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .deal-link {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ocean-light);
+      text-decoration: none;
+    }
+
+    .deal-link:hover { color: var(--coral); }
+
+    /* FOOTER */
+    footer {
+      background: var(--ocean-deep);
+      padding: 60px 40px 30px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .footer-logo span { color: var(--coral); }
+
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .footer-social a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      transition: background 0.2s;
+    }
+
+    .footer-social a:hover { background: var(--coral); }
+
+    .footer-bottom {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .stats { grid-template-columns: 1fr; top: 0; border-radius: 0; }
+      .section { padding: 60px 20px; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-images { display: none; }
+      .newsletter-form { flex-direction: column; }
+      .ask-form { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Cruise<span>Bettr</span></a>
+    <ul class="nav-links">
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#ask">Ask Us</a></li>
+      <li><a href="#deals">Deals</a></li>
+      <li><a href="#subscribe" class="nav-cta">Subscribe</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">Eric & Tamika — Caribbean Cruising</div>
+    <h1 class="hero-title">Cruise<span>Bettr</span></h1>
+    <p class="hero-tagline">Real cruising. Real honest.</p>
+    <p class="hero-desc">
+      Two people who love the water, the islands, and the experience of cruising. 
+      We share what we learn — the good, the bad, and what they don't tell you in the brochures.
+    </p>
+    <div class="hero-actions">
+      <a href="#videos" class="btn-primary">Watch Our Videos</a>
+      <a href="#subscribe" class="btn-secondary">Get Cruise Deals</a>
+    </div>
+    <div class="hero-wave"></div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-number">Caribbean</div>
+      <div class="stat-label">Our Home Waters</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">2</div>
+      <div class="stat-label">Cruise Lines Covered</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">100%</div>
+      <div class="stat-label">Honest Reviews</div>
+    </div>
+  </div>
+
+  <!-- LATEST VIDEOS -->
+  <section class="section" id="videos">
+    <div class="section-tag">Latest Videos</div>
+    <h2 class="section-title">Watch. Learn. Cruise Bettr.</h2>
+    <div class="video-grid">
+      <div class="video-card">
+        <div class="video-thumb">
+          <!-- Replace with your actual YouTube video embed -->
+          <iframe src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="video-info">
+          <div class="video-title">Our Latest Caribbean Cruise Adventure</div>
+          <div class="video-meta">Eric & Tamika • CruiseBettr</div>
+        </div>
+      </div>
+      <div class="video-card">
+        <div class="video-thumb">
+          <iframe src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="video-info">
+          <div class="video-title">What They Don't Tell You About Caribbean Cruising</div>
+          <div class="video-meta">Eric & Tamika • CruiseBettr</div>
+        </div>
+      </div>
+      <div class="video-card">
+        <div class="video-thumb">
+          <iframe src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="video-info">
+          <div class="video-title">Best Ports in the Caribbean — Our Top 5</div>
+          <div class="video-meta">Eric & Tamika • CruiseBettr</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="section-tag">About Us</div>
+        <h2 class="section-title">Meet Eric & Tamika</h2>
+        <p>
+          We're a husband-and-wife team who fell in love with cruising — not the fancy Instagram version, but the real version. The buffets at 2am, the port adventures that don't go as planned, and the sunsets that make you forget you were ever on land.
+        </p>
+        <p>
+          Tamika handles the research, the editing, and making sure we don't miss a thing. Eric brings the experience and the stories you won't find in any travel guide.
+        </p>
+        <p>
+          CruiseBettr is about real talk — what worked, what didn't, and whether a cruise is actually worth it. We don't sugarcoat it.
+        </p>
+      </div>
+      <div class="about-images">
+        <div class="about-img">Eric & Tamika</div>
+        <div class="about-img">At Sea</div>
+        <div class="about-img">On the Island</div>
+        <div class="about-img">Buffet Life 🍽️</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ASK US -->
+  <section class="ask" id="ask">
+    <div class="ask-content">
+      <div class="section-tag">Ask Us Anything</div>
+      <h2 class="section-title">Got a Cruise Question?</h2>
+      <p>
+        Thinking about a Caribbean cruise but have questions? Want to know which line is better for couples? Which ports to skip? Whether the drink package is worth it? Ask us. We might just make a video about it.
+      </p>
+      <div class="ask-form">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label>Your Email</label>
+          <input type="email" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label>Your Question</label>
+          <textarea placeholder="Ask us anything about cruising..."></textarea>
+        </div>
+        <button type="submit">Send Your Question ✈️</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEALS -->
+  <section class="deals" id="deals">
+    <div class="section-tag">Cruise Deals & Resources</div>
+    <h2 class="section-title">Bettr Cruising Starts Here</h2>
+    <div class="deals-grid">
+      <div class="deal-card">
+        <div class="deal-tag">Coming Soon</div>
+        <div class="deal-title">Caribbean Cruise Deals</div>
+        <div class="deal-desc">Handpicked deals on Caribbean cruises — we'll only share ones we'd actually book ourselves.</div>
+        <a href="#" class="deal-link">Get notified when deals drop →</a>
+      </div>
+      <div class="deal-card">
+        <div class="deal-tag">Coming Soon</div>
+        <div class="deal-title">Packing Guide</div>
+        <div class="deal-desc">What to pack for a Caribbean cruise — the essentials and the things you won't need.</div>
+        <a href="#" class="deal-link">Download free guide →</a>
+      </div>
+      <div class="deal-card">
+        <div class="deal-tag">Coming Soon</div>
+        <div class="deal-title">Port Reviews</div>
+        <div class="deal-desc">Honest reviews of Caribbean ports — what to do, what to skip, and how to avoid tourist traps.</div>
+        <a href="#" class="deal-link">Read port guides →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter" id="subscribe">
+    <div class="section-tag">Stay in the Loop</div>
+    <h2 class="section-title">Join the CruiseBettr Crew</h2>
+    <p>Get cruise tips, honest reviews, and exclusive deals delivered to your inbox. No spam — just the water.</p>
+    <form class="newsletter-form" onsubmit="event.preventDefault(); this.innerHTML='<span style=\'color:#FF6B35;font-weight:700;\'>You\'re on the list! 🌊</span>'">
+      <input type="email" placeholder="Your email address" required>
+      <button type="submit">Subscribe 🚢</button>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Cruise<span>Bettr</span></div>
+    <div class="footer-social">
+      <a href="#" title="YouTube">▶</a>
+      <a href="#" title="Instagram">◻</a>
+      <a href="#" title="TikTok">♪</a>
+    </div>
+    <div class="footer-bottom">
+      © 2026 CruiseBettr — Eric & Tamika. All rights reserved.<br>
+      Powered by faith, cruise coffee, and Tamika's editing skills.
+    </div>
+  </footer>
+
+</body>
+</html>
